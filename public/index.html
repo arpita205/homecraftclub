@@ -3,93 +3,334 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HomeCraftClub</title>
+  <title>Arpita Mittal | Portfolio</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
       font-family: Arial, sans-serif;
-      background: #f8f5f0;
-      color: #222;
+      background: #0f172a;
+      color: #e2e8f0;
+      line-height: 1.6;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
     header {
-      background: #6f4e37;
-      color: white;
-      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid #1e293b;
+      z-index: 1000;
     }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h2 {
+      color: #38bdf8;
+      font-size: 24px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a:hover {
+      color: #38bdf8;
+    }
+
     .hero {
-      padding: 60px 40px;
-      text-align: center;
+      max-width: 1100px;
+      margin: auto;
+      padding: 100px 20px 80px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
     }
-    .hero h1 {
-      font-size: 42px;
+
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #f8fafc;
+    }
+
+    .hero-text h3 {
+      font-size: 24px;
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      margin-bottom: 25px;
+      font-size: 18px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 22px;
+      border-radius: 10px;
+      display: inline-block;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .btn-primary:hover {
+      background: #0ea5e9;
+    }
+
+    .btn-secondary {
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+    }
+
+    .btn-secondary:hover {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+
+    .hero-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .hero-card h4 {
+      color: #38bdf8;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .hero-card p {
+      color: #cbd5e1;
       margin-bottom: 10px;
     }
-    .hero p {
-      font-size: 18px;
-      color: #555;
+
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 20px;
     }
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #6f4e37;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 25px;
+      color: #f8fafc;
+      text-align: center;
     }
-    .section {
-      padding: 40px;
+
+    .about, .contact {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 18px;
+      padding: 30px;
     }
-    .cards {
+
+    .skills-grid, .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
+      margin-top: 25px;
     }
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    .skill-card, .project-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 22px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
+
+    .skill-card:hover, .project-card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+
+    .skill-card h4, .project-card h4 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      margin-bottom: 15px;
+    }
+
+    .contact p {
+      margin-bottom: 12px;
+      color: #cbd5e1;
+      font-size: 17px;
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
-      background: #eee;
+      padding: 25px;
+      border-top: 1px solid #1e293b;
+      color: #94a3b8;
       margin-top: 30px;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+      }
+
+      .hero-text h1 {
+        font-size: 36px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h2>HomeCraftClub</h2>
+    <nav>
+      <h2>Arpita Mittal</h2>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section class="hero">
-    <h1>Handmade Creations for Every Home</h1>
-    <p>Discover unique décor, craft ideas, and curated handmade products.</p>
-    <a class="btn" href="#products">Explore</a>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Hi, I'm Arpita Mittal</h1>
+        <h3>Machine Learning Enthusiast | Aspiring Software Engineer</h3>
+        <p>
+          I build practical projects in machine learning, web development, and problem solving.
+          I enjoy turning ideas into working products and continuously improving my technical skills.
+        </p>
 
-  <section class="section" id="products">
-    <h2>Featured Categories</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Wall Décor</h3>
-        <p>Beautiful handmade wall pieces to style your home.</p>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="resume.pdf" target="_blank">View Resume</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>DIY Kits</h3>
-        <p>Creative kits for people who love making things themselves.</p>
+
+      <div class="hero-card">
+        <h4>Quick Profile</h4>
+        <p><strong>Location:</strong> India</p>
+        <p><strong>Focus:</strong> ML, Data Science, Web Development</p>
+        <p><strong>Interests:</strong> AI Products, Full-Stack Apps, Problem Solving</p>
+        <p><strong>Goal:</strong> Build impactful software and grow as an engineer</p>
       </div>
-      <div class="card">
-        <h3>Gift Items</h3>
-        <p>Unique handmade gifts for special occasions.</p>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about">
+        <p>
+          I am a tech-driven learner with strong interest in machine learning, software development,
+          and building useful digital experiences. I enjoy working on projects that combine logic,
+          design, and user value. I’m currently focused on strengthening my portfolio, coding skills,
+          and real-world deployment experience.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Programming</h4>
+          <p>Python, JavaScript, C++, SQL</p>
+        </div>
+        <div class="skill-card">
+          <h4>Machine Learning</h4>
+          <p>Scikit-learn, Pandas, NumPy, Data Analysis</p>
+        </div>
+        <div class="skill-card">
+          <h4>Web Development</h4>
+          <p>HTML, CSS, Node.js, Express, GitHub Actions</p>
+        </div>
+        <div class="skill-card">
+          <h4>Tools</h4>
+          <p>Git, GitHub, AWS EC2, Nginx, PM2</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h4>Portfolio Website</h4>
+          <p>
+            A personal portfolio website deployed on AWS EC2 with Nginx, HTTPS, PM2, and GitHub Actions CI/CD.
+          </p>
+          <a class="btn btn-secondary" href="https://github.com/arpita205/homecraftclub" target="_blank">GitHub</a>
+        </div>
+
+        <div class="project-card">
+          <h4>Machine Learning Project</h4>
+          <p>
+            Add your ML project here with a short explanation, technologies used, and impact.
+          </p>
+          <a class="btn btn-secondary" href="#" target="_blank">Project Link</a>
+        </div>
+
+        <div class="project-card">
+          <h4>Web App / Full Stack Project</h4>
+          <p>
+            Add your best app here — what problem it solves, how you built it, and what makes it useful.
+          </p>
+          <a class="btn btn-secondary" href="#" target="_blank">Project Link</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact">
+        <p><strong>Email:</strong> your-email@example.com</p>
+        <p><strong>LinkedIn:</strong> <a href="#" target="_blank">Add your LinkedIn link</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/arpita205" target="_blank">github.com/arpita205</a></p>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    <p>© 2026 HomeCraftClub. All rights reserved.</p>
+    <p>© 2026 Arpita Mittal. Built with passion and deployed on AWS.</p>
   </footer>
 </body>
 </html>
