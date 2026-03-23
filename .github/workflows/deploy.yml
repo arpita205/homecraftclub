@@ -16,9 +16,9 @@ jobs:
       - name: Prepare SSH key
         run: |
           mkdir -p ~/.ssh
-          cat << 'EOF' > ~/.ssh/ec2_key.pem
-${{ secrets.EC2_SSH_KEY }}
-EOF
+          cat > ~/.ssh/ec2_key.pem << 'EOF'
+          ${{ secrets.EC2_SSH_KEY }}
+          EOF
           chmod 600 ~/.ssh/ec2_key.pem
           ssh-keyscan -H "${{ secrets.EC2_HOST }}" >> ~/.ssh/known_hosts
 
