@@ -3,20 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arpita Mittal | Portfolio</title>
+  <title>Arpita Mittal | AI Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #07111f;
+      --bg2: #0b1728;
+      --card: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #e8f1ff;
+      --muted: #a9bdd8;
+      --accent: #67e8f9;
+      --accent2: #8b5cf6;
+      --accent3: #22c55e;
+      --danger: #fb7185;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(103, 232, 249, 0.18), transparent 25%),
+        radial-gradient(circle at 85% 20%, rgba(139, 92, 246, 0.18), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(34, 197, 94, 0.12), transparent 20%),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .glow::before,
+    .glow::after {
+      content: "";
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.16;
+      animation: floatGlow 10s ease-in-out infinite alternate;
+    }
+
+    .glow::before {
+      background: var(--accent);
+      top: 5%;
+      left: -5%;
+    }
+
+    .glow::after {
+      background: var(--accent2);
+      bottom: -10%;
+      right: -5%;
+    }
+
+    @keyframes floatGlow {
+      from { transform: translateY(0) translateX(0) scale(1); }
+      to { transform: translateY(25px) translateX(20px) scale(1.08); }
     }
 
     a {
@@ -24,313 +94,700 @@
       color: inherit;
     }
 
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
     header {
       position: sticky;
       top: 0;
-      background: rgba(15, 23, 42, 0.95);
-      border-bottom: 1px solid #1e293b;
-      z-index: 1000;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 17, 31, 0.58);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     nav {
-      max-width: 1100px;
-      margin: auto;
-      padding: 18px 20px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      font-size: 1.1rem;
+    }
+
+    .brand-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: grid;
+      place-items: center;
+      color: #03111f;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(103, 232, 249, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
       align-items: center;
     }
 
-    nav h2 {
-      color: #38bdf8;
-      font-size: 24px;
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.25s ease;
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-      flex-wrap: wrap;
+    .nav-links a:hover {
+      color: var(--text);
     }
 
-    nav ul li a:hover {
-      color: #38bdf8;
+    .resume-btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #07111f;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(103, 232, 249, 0.18);
     }
 
     .hero {
-      max-width: 1100px;
-      margin: auto;
-      padding: 100px 20px 80px;
       display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 40px;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 36px;
       align-items: center;
+      padding: 90px 0 60px;
+    }
+
+    .hero-text .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(103, 232, 249, 0.2);
+      border-radius: 999px;
+      background: rgba(103, 232, 249, 0.08);
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
     }
 
     .hero-text h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-      color: #f8fafc;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.02;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -1.8px;
     }
 
-    .hero-text h3 {
-      font-size: 24px;
-      color: #38bdf8;
-      margin-bottom: 20px;
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), #ffffff, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-text p {
-      color: #cbd5e1;
-      margin-bottom: 25px;
-      font-size: 18px;
+      font-size: 1.08rem;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 720px;
+      margin-bottom: 28px;
     }
 
-    .btn-group {
+    .cta-row {
       display: flex;
-      gap: 15px;
+      gap: 16px;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .btn {
-      padding: 12px 22px;
-      border-radius: 10px;
-      display: inline-block;
-      font-weight: bold;
-      transition: 0.3s ease;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .btn-primary {
-      background: #38bdf8;
-      color: #0f172a;
-    }
-
-    .btn-primary:hover {
-      background: #0ea5e9;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #07111f;
+      box-shadow: 0 16px 34px rgba(103, 232, 249, 0.22);
     }
 
     .btn-secondary {
-      border: 1px solid #38bdf8;
-      color: #38bdf8;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
     }
 
-    .btn-secondary:hover {
-      background: #38bdf8;
-      color: #0f172a;
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
-    .hero-card {
-      background: #111827;
-      border: 1px solid #1f2937;
+    .stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .stat {
+      min-width: 140px;
+      padding: 16px 18px;
       border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
     }
 
-    .hero-card h4 {
-      color: #38bdf8;
-      margin-bottom: 15px;
-      font-size: 20px;
+    .stat h3 {
+      font-size: 1.45rem;
+      color: var(--accent);
+      margin-bottom: 4px;
     }
 
-    .hero-card p {
-      color: #cbd5e1;
+    .stat p {
+      margin: 0;
+      font-size: 0.92rem;
+    }
+
+    .hero-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, rgba(103, 232, 249, 0.25), rgba(139, 92, 246, 0.1), rgba(34, 197, 94, 0.2));
+      z-index: -1;
+      border-radius: 28px;
+      filter: blur(16px);
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .terminal {
+      background: rgba(1, 8, 18, 0.8);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      font-family: Consolas, monospace;
+      color: #cce8ff;
+      margin-bottom: 16px;
+    }
+
+    .terminal .line {
       margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .terminal .ok {
+      color: #4ade80;
+    }
+
+    .terminal .ai {
+      color: #67e8f9;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-size: 0.88rem;
     }
 
     section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 70px 20px;
+      padding: 36px 0 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    .section-title {
-      font-size: 32px;
-      margin-bottom: 25px;
-      color: #f8fafc;
-      text-align: center;
-    }
-
-    .about, .contact {
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 18px;
-      padding: 30px;
-    }
-
-    .skills-grid, .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
       gap: 20px;
-      margin-top: 25px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
     }
 
-    .skill-card, .project-card {
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 16px;
+    .section-header h2 {
+      font-size: 2rem;
+      letter-spacing: -0.8px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      transition: transform 0.24s ease, border-color 0.24s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(103, 232, 249, 0.35);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      color: #f8fbff;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.75;
+    }
+
+    .pill {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      background: rgba(103, 232, 249, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(103, 232, 249, 0.18);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
       padding: 22px;
-      transition: transform 0.25s ease, border-color 0.25s ease;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
     }
 
-    .skill-card:hover, .project-card:hover {
-      transform: translateY(-5px);
-      border-color: #38bdf8;
+    .timeline-item small {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
-    .skill-card h4, .project-card h4 {
-      color: #38bdf8;
-      margin-bottom: 12px;
+    .timeline-item h3 {
+      margin-bottom: 10px;
     }
 
-    .project-card p {
-      color: #cbd5e1;
-      margin-bottom: 15px;
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
     }
 
-    .contact p {
-      margin-bottom: 12px;
-      color: #cbd5e1;
-      font-size: 17px;
+    .contact-list p {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .ai-box {
+      background: rgba(0,0,0,0.22);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .ai-box h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
     }
 
     footer {
+      padding: 30px 0 50px;
       text-align: center;
-      padding: 25px;
-      border-top: 1px solid #1e293b;
-      color: #94a3b8;
-      margin-top: 30px;
+      color: #8ba4c4;
     }
 
-    @media (max-width: 850px) {
-      .hero {
+    @media (max-width: 960px) {
+      .hero,
+      .contact-card {
         grid-template-columns: 1fr;
+      }
+
+      .hero {
         padding-top: 60px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links {
+        justify-content: center;
       }
 
       .hero-text h1 {
-        font-size: 36px;
+        font-size: 2.5rem;
       }
 
-      nav {
-        flex-direction: column;
-        gap: 15px;
+      .section-header h2 {
+        font-size: 1.65rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="grid-overlay"></div>
+  <div class="glow"></div>
+
   <header>
-    <nav>
-      <h2>Arpita Mittal</h2>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="brand-badge">AI</div>
+          <span>Arpita Mittal</span>
+        </div>
+
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#capabilities">AI Capabilities</a>
+          <a href="#projects">Projects</a>
+          <a href="#timeline">Journey</a>
+          <a href="#contact">Contact</a>
+          <a class="resume-btn" href="resume.pdf" target="_blank">Resume</a>
+        </div>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main class="container">
     <section class="hero">
       <div class="hero-text">
-        <h1>Hi, I'm Arpita Mittal</h1>
-        <h3>Machine Learning Enthusiast | Aspiring Software Engineer</h3>
+        <div class="tag">● Building intelligent products with code, data, and design</div>
+        <h1>
+          Hi, I’m <span class="gradient-text">Arpita Mittal</span><br />
+          An AI-Driven Developer Crafting Future-Ready Digital Experiences
+        </h1>
         <p>
-          I build practical projects in machine learning, web development, and problem solving.
-          I enjoy turning ideas into working products and continuously improving my technical skills.
+          I build smart, scalable, and visually refined software experiences at the intersection
+          of machine learning, modern web engineering, and cloud deployment. My work focuses on
+          turning complex ideas into polished, practical products.
         </p>
 
-        <div class="btn-group">
-          <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="resume.pdf" target="_blank">View Resume</a>
+        <div class="cta-row">
+          <a href="#projects" class="btn btn-primary">Explore My Work</a>
+          <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>AI</h3>
+            <p>Machine learning focused development</p>
+          </div>
+          <div class="stat">
+            <h3>Cloud</h3>
+            <p>AWS deployment and CI/CD workflows</p>
+          </div>
+          <div class="stat">
+            <h3>Full Stack</h3>
+            <p>Backend systems and modern interfaces</p>
+          </div>
         </div>
       </div>
 
-      <div class="hero-card">
-        <h4>Quick Profile</h4>
-        <p><strong>Location:</strong> India</p>
-        <p><strong>Focus:</strong> ML, Data Science, Web Development</p>
-        <p><strong>Interests:</strong> AI Products, Full-Stack Apps, Problem Solving</p>
-        <p><strong>Goal:</strong> Build impactful software and grow as an engineer</p>
+      <div class="hero-panel">
+        <div class="panel-title">Live Engineering Snapshot</div>
+        <div class="terminal">
+          <div class="line"><span class="ai">> system.mode</span> = portfolio.ai</div>
+          <div class="line"><span class="ai">> deployment</span> = <span class="ok">active</span></div>
+          <div class="line"><span class="ai">> ci_cd.pipeline</span> = <span class="ok">github actions</span></div>
+          <div class="line"><span class="ai">> server.stack</span> = node + nginx + pm2 + ssl</div>
+          <div class="line"><span class="ai">> mission</span> = build meaningful technology</div>
+        </div>
+
+        <div class="chip-row">
+          <div class="chip">Python</div>
+          <div class="chip">Machine Learning</div>
+          <div class="chip">Node.js</div>
+          <div class="chip">Express</div>
+          <div class="chip">AWS EC2</div>
+          <div class="chip">Nginx</div>
+          <div class="chip">CI/CD</div>
+          <div class="chip">Problem Solving</div>
+        </div>
       </div>
     </section>
 
     <section id="about">
-      <h2 class="section-title">About Me</h2>
-      <div class="about">
+      <div class="section-header">
+        <h2>About Me</h2>
         <p>
-          I am a tech-driven learner with strong interest in machine learning, software development,
-          and building useful digital experiences. I enjoy working on projects that combine logic,
-          design, and user value. I’m currently focused on strengthening my portfolio, coding skills,
-          and real-world deployment experience.
+          I’m passionate about building software that feels intelligent, elegant, and useful.
+          I enjoy blending engineering, analytics, and design thinking to create experiences
+          that are both technically strong and user-centered.
         </p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>My Vision</h3>
+          <p>
+            To create technology that is not just functional, but impactful — whether through
+            AI-enabled products, seamless web applications, or efficient backend systems.
+          </p>
+          <span class="pill">Innovation First</span>
+        </div>
+        <div class="card">
+          <h3>My Approach</h3>
+          <p>
+            I work with curiosity, structure, and execution. I focus on understanding a problem
+            deeply, designing a practical solution, and delivering it with polish.
+          </p>
+          <span class="pill">Problem → Product</span>
+        </div>
+        <div class="card">
+          <h3>What Drives Me</h3>
+          <p>
+            Learning fast, shipping real systems, and building a portfolio that reflects both
+            technical depth and product thinking.
+          </p>
+          <span class="pill">Growth Mindset</span>
+        </div>
       </div>
     </section>
 
     <section id="skills">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <h4>Programming</h4>
+      <div class="section-header">
+        <h2>Core Skills</h2>
+        <p>
+          My technical foundation spans software development, cloud deployment, data tooling,
+          and practical machine learning workflows.
+        </p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Programming</h3>
           <p>Python, JavaScript, C++, SQL</p>
+          <span class="pill">Code & Logic</span>
         </div>
-        <div class="skill-card">
-          <h4>Machine Learning</h4>
-          <p>Scikit-learn, Pandas, NumPy, Data Analysis</p>
+        <div class="card">
+          <h3>Machine Learning</h3>
+          <p>Scikit-learn, NumPy, Pandas, model experimentation, evaluation</p>
+          <span class="pill">AI Workflow</span>
         </div>
-        <div class="skill-card">
-          <h4>Web Development</h4>
-          <p>HTML, CSS, Node.js, Express, GitHub Actions</p>
+        <div class="card">
+          <h3>Web Engineering</h3>
+          <p>HTML, CSS, Node.js, Express, REST basics, deployment architecture</p>
+          <span class="pill">Web Systems</span>
         </div>
-        <div class="skill-card">
-          <h4>Tools</h4>
-          <p>Git, GitHub, AWS EC2, Nginx, PM2</p>
+        <div class="card">
+          <h3>Cloud & DevOps</h3>
+          <p>AWS EC2, Nginx, PM2, HTTPS, DNS, GitHub Actions CI/CD</p>
+          <span class="pill">Production Ready</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities">
+      <div class="section-header">
+        <h2>AI Capabilities</h2>
+        <p>
+          A premium portfolio should show not only tools, but how you think in systems, intelligence,
+          automation, and product outcomes.
+        </p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Data-to-Decision Thinking</h3>
+          <p>
+            I approach AI projects by understanding the data, identifying patterns, selecting
+            the right modeling strategy, and connecting outputs to real decisions.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Automation Mindset</h3>
+          <p>
+            I like building workflows that reduce manual effort — from deployment pipelines to
+            backend processes and repeatable engineering systems.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Scalable Product Thinking</h3>
+          <p>
+            I’m interested in building AI-powered software that is not just a demo, but something
+            deployable, usable, and scalable.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Human-Centered Interfaces</h3>
+          <p>
+            Strong systems should also feel intuitive. I aim to make technical products understandable,
+            accessible, and visually engaging.
+          </p>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h4>Portfolio Website</h4>
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+        <p>
+          Replace the placeholders below with your best projects. Keep each one focused on problem,
+          stack, and impact.
+        </p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>AI Portfolio Deployment</h3>
           <p>
-            A personal portfolio website deployed on AWS EC2 with Nginx, HTTPS, PM2, and GitHub Actions CI/CD.
+            Built and deployed a live portfolio on AWS using Node.js, Nginx, HTTPS, PM2, GitHub,
+            and GitHub Actions for CI/CD automation.
           </p>
-          <a class="btn btn-secondary" href="https://github.com/arpita205/homecraftclub" target="_blank">GitHub</a>
+          <span class="pill">AWS + DevOps</span>
         </div>
-
-        <div class="project-card">
-          <h4>Machine Learning Project</h4>
+        <div class="card">
+          <h3>Machine Learning Project</h3>
           <p>
-            Add your ML project here with a short explanation, technologies used, and impact.
+            Add your best ML project here — dataset, approach, model, result, and what you learned.
           </p>
-          <a class="btn btn-secondary" href="#" target="_blank">Project Link</a>
+          <span class="pill">ML Showcase</span>
         </div>
-
-        <div class="project-card">
-          <h4>Web App / Full Stack Project</h4>
+        <div class="card">
+          <h3>Web / Full Stack Product</h3>
           <p>
-            Add your best app here — what problem it solves, how you built it, and what makes it useful.
+            Add a project that shows your software engineering skills — backend logic, APIs, UI, or
+            problem-solving depth.
           </p>
-          <a class="btn btn-secondary" href="#" target="_blank">Project Link</a>
+          <span class="pill">Engineering Build</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="section-header">
+        <h2>Journey</h2>
+        <p>
+          Show your growth story. Recruiters and collaborators remember progress, ownership,
+          and direction.
+        </p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <small>Stage 01</small>
+          <h3>Built Core Programming Foundation</h3>
+          <p>
+            Strengthened problem-solving and software basics through hands-on coding and project work.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <small>Stage 02</small>
+          <h3>Explored Machine Learning & Data Workflows</h3>
+          <p>
+            Worked with data tools, ML libraries, and project-based experimentation to understand how
+            intelligence is built into software.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <small>Stage 03</small>
+          <h3>Deployed a Production-Style Portfolio</h3>
+          <p>
+            Learned cloud deployment, reverse proxy setup, SSL, PM2, Git, and CI/CD to take projects
+            from local code to a live public website.
+          </p>
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <h2 class="section-title">Contact</h2>
-      <div class="contact">
-        <p><strong>Email:</strong> your-email@example.com</p>
-        <p><strong>LinkedIn:</strong> <a href="#" target="_blank">Add your LinkedIn link</a></p>
-        <p><strong>GitHub:</strong> <a href="https://github.com/arpita205" target="_blank">github.com/arpita205</a></p>
+      <div class="section-header">
+        <h2>Let’s Build Something Meaningful</h2>
+        <p>
+          I’m open to internships, project collaborations, AI/product conversations, and engineering opportunities.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-list">
+          <p><strong>Name:</strong> Arpita Mittal</p>
+          <p><strong>Email:</strong> your-email@example.com</p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/arpita205" target="_blank">github.com/arpita205</a></p>
+          <p><strong>LinkedIn:</strong> <a href="#" target="_blank">Add your LinkedIn URL</a></p>
+          <p><strong>Resume:</strong> <a href="resume.pdf" target="_blank">Open Resume</a></p>
+        </div>
+
+        <div class="ai-box">
+          <h3>AI-Ready Collaboration</h3>
+          <p>
+            Interested in machine learning, intelligent products, automation systems, and modern engineering workflows.
+          </p>
+          <br />
+          <p>
+            If you’re building something ambitious and want a thoughtful, execution-focused engineer,
+            I’d love to connect.
+          </p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Arpita Mittal. Built with passion and deployed on AWS.</p>
+    <p>© 2026 Arpita Mittal — Designed, engineered, and deployed with precision.</p>
   </footer>
 </body>
 </html>
