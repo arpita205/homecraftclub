@@ -1,22 +1,15 @@
-
 const express = require('express');
+const path = require('path');
+
 const app = express();
-console.log("Deployed via CI/CD");
+const PORT = 3000;
 
-app.use(express.json()); // VERY IMPORTANT
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/webhook', (req, res) => {
-    const { exec } = require('child_process');
-
-    console.log("Webhook triggered!");
-
-    exec('cd /home/ec2-user/homecraftclub && git pull origin main && npm install && pm2 restart all',
-        (error, stdout, stderr) => {
-            console.log("STDOUT:", stdout);
-            console.log("STDERR:", stderr);
-        });
-
-    res.send("Deployment triggered");
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
