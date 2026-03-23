@@ -1,5 +1,7 @@
+
 const express = require('express');
 const app = express();
+console.log("Deployed via CI/CD");
 
 app.use(express.json()); // VERY IMPORTANT
 
